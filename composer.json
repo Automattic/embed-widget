@@ -1,0 +1,20 @@
+{
+	"name": "cftp/embed-widget",
+	"description": "A widget for embedding things that adds validation",
+	"license": "GPL-2.0+",
+	"type": "wordpress-plugin",
+	"authors": [
+		{
+			"name": "Tom J Nowell",
+			"email": "contact@tomjn.com",
+			"homepage": "http://tomjn.com"
+		},
+		{
+			"name"    : "Code For The People",
+			"homepage": "http://codeforthepeople.com/"
+		}
+	],
+	"require": {
+		"composer/installers": "~1.0"
+	}
+}
