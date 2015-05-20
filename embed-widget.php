@@ -1,9 +1,9 @@
 <?php
 /**
- * Plugin Name: CFTP Embed Widget
+ * Plugin Name: Embed Widget
  * Description: A self html validating embed widget
- * Version: 1.0.0
- * Author: Tom J Nowell
+ * Version: 1.1.0
+ * Author: Tom J Nowell, Automattic, CFTP
  * License: GPL-2.0+
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  */
@@ -20,11 +20,11 @@ class Embed_Code_Widget extends WP_Widget {
 
 		echo $args['before_widget'];
 		if ( ! empty( $title ) ) {
-			echo $args['before_title'] . $title . $args['after_title'];
+			echo $args['before_title'] . esc_html( $title ) . $args['after_title'];
 		}
 		if ( !empty( $instance['intro'] ) ) {
 			?>
-			<p><?php echo $instance['intro']; ?></p>
+			<p><?php echo wp_kses_post( $instance['intro'] ); ?></p>
 			<?php
 		}
 		$code = $instance['code'];
@@ -40,7 +40,7 @@ class Embed_Code_Widget extends WP_Widget {
 		?>
 		<p>
 			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' ); ?></label>
-			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
+			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
 		</p>
 		<?php
 		$intro = '';
@@ -49,8 +49,8 @@ class Embed_Code_Widget extends WP_Widget {
 		}
 		?>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'intro' ); ?>"><?php _e( 'Intro text:' ); ?></label>
-			<input class="widefat" id="<?php echo $this->get_field_id( 'intro' ); ?>" name="<?php echo $this->get_field_name( 'intro' ); ?>" type="text" placeholder="Text shown before embed code" value="<?php echo esc_attr( $intro ); ?>" />
+			<label for="<?php echo esc_attr( $this->get_field_id( 'intro' ) ; ?>"><?php _e( 'Intro text:' ); ?></label>
+			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'intro' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'intro' ) ); ?>" type="text" placeholder="Text shown before embed code" value="<?php echo esc_attr( $intro ); ?>" />
 		</p>
 		<?php
 		$code = '';
@@ -82,15 +82,15 @@ class Embed_Code_Widget extends WP_Widget {
 					"<br>  Line: $error->line" .
 					",  Column: $error->column";
 
-				echo '<div class="error"><p>'.$return.'</p></div>';
+				echo '<div class="error"><p>'.esc_html( $return).'</p></div>';
 			}
 			libxml_clear_errors();
 
 		}
 		?>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'code' ); ?>"><?php _e( 'Embed code:' ); ?></label>
-			<textarea class="widefat" rows="16" cols="20" id="<?php echo $this->get_field_id( 'code' ); ?>" name="<?php echo $this->get_field_name( 'code' ); ?>" type="text" placeholder="HTML Code"><?php echo esc_attr( $code ); ?></textarea>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'code' ) ); ?>"><?php _e( 'Embed code:' ); ?></label>
+			<textarea class="widefat" rows="16" cols="20" id="<?php echo esc_attr( $this->get_field_id( 'code' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'code' ) ); ?>" type="text" placeholder="HTML Code"><?php echo esc_attr( $code ); ?></textarea>
 		</p>
 		<p><small>There is a danger that code pasted in here will break the site layout. <em>Please test your embed codes when you add them</em>, and consider any warnings shown here carefully.</small></p>
 	<?php
