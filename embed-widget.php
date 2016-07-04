@@ -49,7 +49,7 @@ class Embed_Code_Widget extends WP_Widget {
 		}
 		?>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'intro' ) ; ?>"><?php _e( 'Intro text:' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'intro' ) ); ?>"><?php _e( 'Intro text:' ); ?></label>
 			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'intro' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'intro' ) ); ?>" type="text" placeholder="Text shown before embed code" value="<?php echo esc_attr( $intro ); ?>" />
 		</p>
 		<?php
